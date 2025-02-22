@@ -13,6 +13,7 @@ usage_help() {
 -s <silent output>
 -c <version code>
 -p <skip custom patch>
+-l <remove luci feeds>
 -o <dist name>
 -d <only prepare dev env>
 -D <avoid fresh build instead use patches from the last build>
@@ -66,8 +67,25 @@ apply_patches() {
 	cd "$ROOT_DIR"
 }
 
+remove_luci() {
+	[ "$NO_LUCI" == "0" ] && return 0
+
+	local feeds_file="$OPENWRT_DIR/feeds.conf.default"	
+	local tmp_feeds_file="$OPENWRT_DIR/feeds.conf.tmp"
+
+	[ -z "$OPENWRT_DIR" ] && return 1	
+	[ ! -d "$OPENWRT_DIR" ] && return 1
+	[ ! -f $feeds_file ] && return 1
+	[ -f $tmp_feeds_file ] && rm $tmp_feeds_file
+	
+	mv $feeds_file $tmp_feeds_file 
+	sed 's/src-git luci/#src-git luci/' < $tmp_feeds_file > $feeds_file
+}
+
 update_oem_feed() {
 	[ -z "$OPENWRT_DIR" ] && return 1
+
+	[ "$NO_LUCI" == "1" ] && remove_luci
 
 	local action=${1:-add}
 	local feed_name="${OEM}_packages"
@@ -265,7 +283,7 @@ if [ -f "$ROOT_DIR/profile"  ]; then
 	. $ROOT_DIR/profile
 fi
 
-while getopts m:v:c:o:AKdpCDXVsh OPT; do
+while getopts m:v:c:o:AKdlpCDXVsh OPT; do
 	case $OPT in
 		m) MODELS=$OPTARG ;;
 		v) VERSION=$OPTARG ;;
@@ -280,6 +298,7 @@ while getopts m:v:c:o:AKdpCDXVsh OPT; do
 		K) ALL_KMODS=1 ;;
 		V) VERBOSE=1;;
 		s) SILENT=1;;
+		l) NO_LUCI=1;;
 		h) usage_help 0 ;;
 		*) usage_help 1 ;;
 	esac
@@ -296,6 +315,8 @@ done
 [ -z "$OPENWRT_TAG" ] && OPENWRT_TAG="v23.05.3"
 [ -z "$VERBOSE" ] && VERBOSE=0
 [ -z "$SILENT" ] && SILENT=0
+[ -z "$NO_LUCI" ] && NO_LUCI=0
+
 OEM_DIR="$ROOT_DIR/$OEM"
 
 # validate OEM dir path
