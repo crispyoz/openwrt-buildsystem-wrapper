@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# File:   ledtest
+# Author: chris
+#
+# Created on 16 Jun. 2021, 22:18:44 pm
+#
+ 
+while :
+do
+    /usr/sbin/ledoff
+    sleep 3
+    /usr/sbin/red
+    sleep 3
+    /usr/sbin/green
+    sleep 3
+    /usr/sbin/blue
+    sleep 3
+done
+

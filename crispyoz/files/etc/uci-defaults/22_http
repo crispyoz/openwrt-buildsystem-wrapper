@@ -1,0 +1,11 @@
+#!/bin/sh
+
+. ./../sysoptions.conf
+
+uci -q batch << EOF > /dev/null
+	set uhttpd.main.listen_http='$LOCAL_IP:80'
+	set uhttpd.main.listen_https='$LOCAL_IP:443'
+	commit uhttpd
+EOF
+
+exit 0

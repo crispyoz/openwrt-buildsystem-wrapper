@@ -1,0 +1,10 @@
+#!/bin/sh
+
+uci -q batch << EOF > /dev/null
+	set onion.@onion[0].version='23.5.3'
+	set onion.@onion[0].build='abc'
+	commit onion
+EOF
+
+exit 0
+

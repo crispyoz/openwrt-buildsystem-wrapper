@@ -1,0 +1,7 @@
+ 0 3 * * *   opkg --no-check-certificate update
+ 2 3 * * *   opkg --no-check-certificate upgrade cubicwall
+ 5 3 * * *   /etc/cubicwall/scripts/backup.sh
+*/10 * * * *  /etc/cubicwall/scripts/mqtt_push_data.sh
+ 0 11,23 * * *   /etc/cubicwall/scripts/sql_exec.sh clean_summary
+0 0 * * *    /etc/cubicwall/scripts/sql_exec.sh clean_traffic
+

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+. ./../sysoptions.conf
+
+SYSOPTION_FILE=/etc/sysoptions.conf
+
+if [ "$SYSTEM_TYPE" != "cubicwall" ]; then
+        rm -r -f /etc/cubicwall
+        rm -r -f /etc/config/cubicwall
+        rm -r -f /usr/sbin/cubicwalld
+        service cubicwalld stop
+        service cubicwalld disable
+fi
+
+# Remove the system option file we use to configure uci-defaults
+#[ -f "$SYSOPTION_FILE" ] && rm -f "$SYSOPTION_FILE"
+
+exit 0
+

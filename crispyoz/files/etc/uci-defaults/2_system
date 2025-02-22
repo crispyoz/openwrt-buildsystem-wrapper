@@ -1,0 +1,39 @@
+#!/bin/sh
+
+. ./../sysoptions.conf
+
+ADD=$(cat /sys/class/net/eth0/address | awk -F':' '{ print $3$4$5$6 }' | awk '{print toupper($0)}') 
+HOST=$(printf "$SYSTEM_TYPE-%x" $((0x$ADD-1)))
+
+uci -q batch << EOF > /dev/null
+	set system.@system[0].hostname=$HOST
+	set system.@system[0].timezone='AEST-10AEDT,M10.1.0,M4.1.0/3'
+	set system.@system[0].zonename='Canberra, Melbourne, Sydney'
+	
+	if [ -n $TTY_LOGIN ]; then
+		 set system.@system[0].ttylogin=$TTY_LOGIN; 
+	fi
+	
+	if [ -n $LOG_HOST ]; then
+		set system.@system[0].log_ip=$LOG_HOST
+		set system.@system[0].log_port='5140'
+		set system.@system[0].log_proto='udp'
+		set system.@system[0].log_remote='1'
+	fi
+			
+	if [ -n $SYSTEM_TYPE ] && [ "$SYSTEM_TYPE" = "dash" ]; then
+			set system.wwan_led=led
+			set system.wwan_led.name='WWAN'
+			set system.wwan_led.sysfs='omega2dash:blue:wifi'
+			set system.wwan_led.trigger='netdev'
+			set system.wwan_led.dev='apcli0'
+			set system.wwan_led.mode='link tx rx'
+	fi
+
+	commit
+EOF
+
+# Need to the uci system or following uci-default scripts don't get the updated version
+# service system restart
+
+exit 0

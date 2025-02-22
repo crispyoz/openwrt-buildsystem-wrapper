@@ -1,0 +1,21 @@
+#!/bin/sh
+
+. ./../sysoptions.conf
+
+HOST_FILE=/etc/hosts
+OLD_HOST_FILE=/etc/hosts.tmp
+HOST="$SYSTEM_TYPE-00000000"
+
+[ -f "$HOST_FILE" ] && mv $HOST_FILE $OLD_HOST_FILE
+
+echo "$LOCAL_IP  $HOST" > $HOST_FILE
+echo "$LOCAL_IP  $HOST.local" >> $HOST_FILE
+echo "$LOCAL_IP  $HOST.localdomain" >> $HOST_FILE
+
+if [ -f "$OLD_HOST_FILE" ]; then 
+	cat $OLD_HOST_FILE >> $HOST_FILE
+	rm $OLD_HOST_FILE
+fi
+
+exit 0
+

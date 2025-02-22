@@ -1,0 +1,10 @@
+#!/bin/sh
+# 
+# File:   ledoff
+# Author: chris
+#
+# Created on 9 Jun. 2021, 5:39:44 pm
+#
+
+echo -en '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00' > /dev/ledchain0 # off
+

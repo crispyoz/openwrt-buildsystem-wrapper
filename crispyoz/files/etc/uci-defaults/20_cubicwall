@@ -1,0 +1,26 @@
+#!/bin/sh
+
+. ./../sysoptions.conf
+
+uci -q batch << EOF > /dev/null
+        if [ "$SYSTEM_TYPE" = "cubicwall" ]; then
+                set cubicwall.@main[0].version=$(cubicwalld -n)
+
+                echo -e "src/gz cubicwall https://repo.cubicwall.com/CWv2" >> /etc/opkg/customfeeds.conf
+
+                crontab /etc/cubicwall/crontab-input
+                rm /etc/cubicwall/crontab-input
+                service cron enable
+                service cubicwall disable
+        fi
+
+        if [ "$SYSTEM_TYPE" = "dash" ]; then
+
+        fi
+
+        commit
+EOF
+
+      
+exit 0
+

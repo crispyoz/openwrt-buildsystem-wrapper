@@ -1,0 +1,12 @@
+diff --git a/config/Config-kernel.in b/config/Config-kernel.in
+index ab827d6a71..5141466133 100644
+--- a/config/Config-kernel.in
++++ b/config/Config-kernel.in
+@@ -44,6 +44,7 @@ config KERNEL_DEBUG_FS
+ config KERNEL_MIPS_FP_SUPPORT
+ 	bool
+ 	default y if TARGET_pistachio
++	default y if TARGET_ramips_mt76x8
+ 
+ config KERNEL_ARM_PMU
+ 	bool

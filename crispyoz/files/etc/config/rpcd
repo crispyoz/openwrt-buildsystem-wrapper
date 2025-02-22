@@ -1,0 +1,12 @@
+config login
+	option username 'root'
+	option password '$p$root'
+	list read '*'
+	list write '*'
+
+config login
+        option username 'admin'
+        option password '$p$admin'
+        list read adminuser
+        list write adminuser
+

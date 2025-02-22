@@ -1,0 +1,16 @@
+#!/bin/sh
+
+. ./../sysoptions.conf
+
+RC_LOCAL="/etc/rc.local"
+
+if [ "$SYSTEM_TYPE" = "dash" ]; then
+	echo "# set to 50% brightness" > $RC_LOCAL
+	echo "omega2-ctrl gpiomux set uart2 pwm23" >> $RC_LOCAL
+	echo "onion pwm 3 50 120" >> $RC_LOCAL
+	echo "exit 0" >> $RC_LOCAL
+fi
+
+exit 0
+
+

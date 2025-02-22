@@ -1,0 +1,21 @@
+#!/bin/sh
+# 
+# File:   40-setup
+# Author: chris
+#
+# Created on 25 Dec. 2024, 4:05:00 am
+#
+# Place me in /etc/hotplug.d/iface/40-setup
+
+WIFI_INTERFACE="wwan"
+WIFI_ACTION="ifup"
+SETUP_FILE=/etc/cubicwall/setup.sh
+
+if [ "$INTERFACE" = "$WIFI_INTERFACE" ]; then
+    if [ "$ACTION" = "$WIFI_ACTION" ]; then 
+        echo "Inside action: ${ACTION}"  >> $MYLOG  
+		echo "nameserver $(ip -o -4 a s apcli0 | awk '{ print $4 }' | cut -d/ -f1)" >> /etc/resolv.conf
+		[ -f $SETUP_FILE ] && sh $SETUP_FILE || echo ""
+    fi
+fi
+

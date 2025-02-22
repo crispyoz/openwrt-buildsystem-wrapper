@@ -1,0 +1,35 @@
+#!/bin/sh
+# 
+# This file lives in /usr/libexec/rpcd
+# adds opkg upgrade cubicwall and cubicwall restart functions which are called by CubicWall tools page "update"
+#
+#
+case "$1" in
+        list)
+                echo '{ "update": { }, "restart":{} }'
+        ;;
+        call)
+                case "$2" in
+                        update)
+                                # read the arguments
+                                # read input;
+
+                                # optionally log the call
+                                logger -t "cw" "call" "$2"
+
+                                # return json object or an array
+                                ret=$(opkg update)
+                                ret2=$(opkg upgrade cubicwall)
+                                logger -t "after cw" "call" "$2" ":" "$ret" ", : $ret2"
+#                               echo "$ret"
+                                #echo '{"status" : "OK"}'
+                                echo '{"status":"OK", "Msg1":"'"$ret"'", "Msg2":"'"$ret2"'" }'
+                        ;;
+                        restart) ret=$(/etc/init.d/cubicwalld restart)
+                                 echo '{"status" : "OK"}'
+                        ;;
+                esac
+        ;;
+esac
+
+

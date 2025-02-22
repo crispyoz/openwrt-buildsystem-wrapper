@@ -1,0 +1,17 @@
+#!/bin/sh
+
+. ./../sysoptions.conf
+
+HOST=$(uci get system.@system[0].hostname)
+
+uci -q batch << EOF > /dev/null
+	set network.wwan=interface
+	set network.wwan.hostname='$HOST'
+	set network.wwan.proto='dhcp'
+	set network.wwan.device='apcli0'
+	set network.wan.hostname='$HOST'
+	set network.lan.ipaddr='$LOCAL_IP'
+	commit
+EOF
+
+exit 0

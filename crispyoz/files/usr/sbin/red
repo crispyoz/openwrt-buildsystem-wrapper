@@ -1,0 +1,9 @@
+#!/bin/sh
+# 
+# File:   red
+# Author: chris
+#
+# Created on 9 Jun. 2021, 5:39:44 pm
+#
+
+echo -en '\xff\x00\x00\xff\x00\x00\xff\x00\x00\xff\x00\x00' > /dev/ledchain0 # red

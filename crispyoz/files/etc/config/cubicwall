@@ -1,0 +1,40 @@
+
+config main
+	option board '8.5.2'
+	option dns_timeout '2000'
+	option interface 'apcli0'
+	option port '53'
+	option log_stats_interval '100'
+	option stats_db_path '/etc/cubicwall/data'
+	option path '/etc/cubicwall'
+	option thread_pool '150'
+	option socket_buffer_size '32767'
+	option log_level '6'
+	option record_traffic '1'
+	option disabled '0'
+	option upstream_dns3 '8.8.8.8'
+	option upstream_dns4 '8.8.4.4'
+	option upstream_dns '8.8.8.8'
+	option upstream_dns2 '1.1.1.1'
+	option dns_max_time_on_secondary '600'
+	option first_boot '1'
+
+config license
+	option data_collection '1'
+	option share_data '1'
+
+config ledchain
+	option device_no '0'
+	option pwm_group 'pwm0'
+	
+config mqtt
+	option mqtt_host 'mqtt.cubicwall.com'
+	option mqtt_port '8883'
+	option mqtt_topic 'cw/rpt'
+
+config logging
+	option debug '0'
+	option debug_sql '0'
+	option debug_lists '0'
+	option debug_dns_comms '0'
+

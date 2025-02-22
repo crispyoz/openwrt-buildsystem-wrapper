@@ -1,0 +1,30 @@
+{
+        "adminuser": {
+                "description": "Administrative user access role",
+                "read": {
+                        "ubus": {
+                                "session": [
+                                        "access",
+                                        "login"
+                                ]
+                        },
+                        "uci": {
+                                        "system": ["timezone", "zonename"],
+					"wireless":["*"],
+					"cubicwall" : ["*"]
+			
+			}
+                },
+                "write": {
+                        "ubus": {
+                                "*": [ "*" ]
+                        },
+                        "uci": {
+					"system": ["*"],
+					"wireless": ["*"],
+					"cubicwall" : ["*"]
+                	}
+		}
+        }
+}
+

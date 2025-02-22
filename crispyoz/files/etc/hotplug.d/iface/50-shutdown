@@ -1,0 +1,17 @@
+#!/bin/bash
+# 
+# File:   50-shutdown
+# Author: chris
+#
+# Created on 6 May. 2021, 1:07:07 am
+#
+#!/bin/sh
+# Place me in /etc/hotplug.d/iface/50-shutdown
+
+TARGET_INTERFACE="loopback"
+
+if [ "$ACTION" = "ifdown" -a "$INTERFACE" = "$TARGET_INTERFACE" ]; then
+        #echo -en '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00' > /dev/ledchain0 # off
+        /usr/sbin/ledoff
+fi
+

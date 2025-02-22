@@ -1,0 +1,20 @@
+<svg width="380" height="320" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="322" width="382" y="-1" x="-1"/>
+ </g>
+
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_1">
+   <line id="svg_2" y2="115.41" x2="371.508" y1="115.41" x1="4.737" stroke-miterlimit="10" stroke-width="20" stroke="#ffffff" fill="none"/>
+   <line id="svg_3" y2="31.926" x2="371.508" y1="31.926" x1="4.737" stroke-miterlimit="10" stroke-width="20" stroke="#ffffff" fill="none"/>
+   <line id="svg_4" y2="192.625" x2="371.508" y1="192.625" x1="4.737" stroke-miterlimit="10" stroke-width="20" stroke="#ffffff" fill="none"/>
+   <line id="svg_5" y2="273.344" x2="371.508" y1="273.344" x1="4.737" stroke-miterlimit="10" stroke-width="20" stroke="#ffffff" fill="none"/>
+   <rect stroke="#ffffff" id="svg_6" height="61.083997" width="67.772995" fill="#ffaa56" y="0.395" x="265.695999"/>
+   <rect stroke="#ffffff" id="svg_13" height="61.083997" width="67.772995" fill="#ffaa56" y="161.395" x="244.695999"/>
+   <rect stroke="#ffffff" id="svg_14" height="61.083997" width="67.772995" fill="#ffaa56" y="85.395" x="118.695999"/>
+   <rect stroke="#ffffff" id="svg_15" height="61.083997" width="67.772995" fill="#ffaa56" y="242.395" x="46.695999"/>
+  </g>
+ </g>
+</svg>
