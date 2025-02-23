@@ -72,8 +72,6 @@ apply_patches() {
 remove_luci() {
 	[ "$NO_LUCI" == "0" ] && return 0
 
-	echo "remove_luci"
-	
 	local feeds_file="$OPENWRT_DIR/feeds.conf.default"	
 	local tmp_feeds_file="$OPENWRT_DIR/feeds.conf.tmp"
 
@@ -83,7 +81,7 @@ remove_luci() {
 	[ -f $tmp_feeds_file ] && rm $tmp_feeds_file
 	
 	mv $feeds_file $tmp_feeds_file 
-	sed 's/src-git luci/#src-git luci/' < $tmp_feeds_file > $feeds_file
+	sed 's/^src-git luci/#src-git luci/' < $tmp_feeds_file > $feeds_file
 }
 
 update_oem_feed() {
