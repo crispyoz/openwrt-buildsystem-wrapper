@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#set -x
+
 cd `dirname $0`
 
 ROOT_DIR="$PWD"
@@ -70,6 +72,8 @@ apply_patches() {
 remove_luci() {
 	[ "$NO_LUCI" == "0" ] && return 0
 
+	echo "remove_luci"
+	
 	local feeds_file="$OPENWRT_DIR/feeds.conf.default"	
 	local tmp_feeds_file="$OPENWRT_DIR/feeds.conf.tmp"
 
@@ -84,8 +88,6 @@ remove_luci() {
 
 update_oem_feed() {
 	[ -z "$OPENWRT_DIR" ] && return 1
-
-	[ "$NO_LUCI" == "1" ] && remove_luci
 
 	local action=${1:-add}
 	local feed_name="${OEM}_packages"
@@ -145,6 +147,7 @@ openwrt_version_mismatch() {
 }
 
 prepare_openwrt() {
+
 	if openwrt_version_mismatch; then
 		git -C "$OPENWRT_DIR" reset HEAD --hard
 		git -C "$OPENWRT_DIR" fetch --all
@@ -163,6 +166,7 @@ prepare_openwrt() {
 }
 
 prepare_build() {
+
 	[ "$DEV_PREPARE_SKIP" == "1" ] && return 0
 
 	prepare_openwrt
@@ -206,6 +210,8 @@ prepare_model_config() {
 }
 
 build_model_firmware() {
+
+	[ "$NO_LUCI" == "1" ] && remove_luci
 	[ -z "$OPENWRT_DIR" ] && return 1
 	[ ! -d "$OPENWRT_DIR" ] && return 1
 
